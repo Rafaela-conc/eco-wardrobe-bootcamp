@@ -1,3 +1,4 @@
+
 import click
 from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar
 
