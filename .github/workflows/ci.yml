@@ -1,0 +1,21 @@
+#Pipeline de CI
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install pytest ruff click tabulate
+      - name: Run Lint (Ruff)
+        run: ruff check
+      - name: Run Tests (Pytest)
+        run: pytest
