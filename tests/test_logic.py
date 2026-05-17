@@ -7,7 +7,7 @@ def test_calculo_impacto_positivo():
     assert co2 == 15
 
 def test_decisao_compra_impulsiva():
-    assert "ALERTA" in avaliar_necessidade(10)
+    assert "CUIDADO" in avaliar_necessidade(10)
 
 def test_decisao_compra_consciente():
     assert "consciente" in avaliar_necessidade(50)
@@ -26,7 +26,7 @@ def test_calculo_impacto_positivo():
 
 def test_decisao_compra_impulsiva():
     #Testando o caso de poucas vezes de uso
-    assert "ALERTA" in avaliar_necessidade(10)
+    assert "CUIDADO" in avaliar_necessidade(10)
 
 def test_decisao_compra_consciente():
     #Testando o caminho consciente

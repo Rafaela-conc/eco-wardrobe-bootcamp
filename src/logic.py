@@ -44,7 +44,7 @@ def calcular_impacto (quantidade_pecas) :
 def avaliar_necessidade(vezes_uso_estimado):
     """regra que se usar a peca menos de 30 vezes nao vale a pena comprar a peca"""
     if vezes_uso_estimado <30:
-         return "ALERTA: Esta compra pode ser desnecessaria e vai acabar parada no seu guarda-roupa"
+         return "CUIDADO: Esta compra pode ser desnecessaria e vai acabar parada no seu guarda-roupa"
     else:
         return "Compra consciente, ela ira ser usada no cotiadiano"
 

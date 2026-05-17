@@ -4,7 +4,7 @@ from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_r
 
 @click.group()
 def cli():
-    """EcoWardrobe - Ajuda voce a consumir moda de forma consciente!"""
+
     pass
 
 @cli.command()
