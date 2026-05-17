@@ -1,0 +1,13 @@
+[project]
+name= "eco-wardrobe"
+version="1.0.0" #versionamento semantico
+description="Calculadore de impacto ambiental e gerenciador de consumo de roupas"
+dependencies = [
+    "click", #criar o cli
+    "tabulate" #exibir tabelas
+]
+[tool.pyest.ini_options]
+testpaths= ["tests"]
+
+[tool.ruff] #ferramenta de linting
+line-length=88

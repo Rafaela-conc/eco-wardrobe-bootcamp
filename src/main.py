@@ -1,22 +1,34 @@
-#Ponto de entrada (CLI)
+
 import click
-from logic import calcular_impacto, avaliar_necessidade
+from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar
 
 @click.group()
 def cli():
-    """Eco Wardrobe: Ajuda voce consumir a moda de uma maneira consciente"""
+    """EcoWardrobe - Ajuda voce a consumir moda de forma consciente!"""
     pass
-@cli.command()
-@click.option('--pecas', default=1, help='Quantidade de pecas compradas no ano.')
-def impacto(pecas):
-    agua, co2=calcular_impacto(pecas)
-    click.echo(f"Seu guarda-roupa consumiu aproximadamente. {agua}L de agua e gerou {co2}kg de CO2.")
 
 @cli.command()
-@click.argument('usos', type=int)
-def decidir(usos):
-    resultado=avaliar_necessidade(usos)
+@click.option('--pecas', default=1, help='Quantidade de pecas de roupa.')
+def impacto(pecas):
+    """Calcula o impacto ambiental da compra."""
+    agua, co2 = calcular_impacto(pecas)
+    click.echo(f"Para produzir {pecas} peca(s) de roupa sao gastos aproximadamente:")
+    click.echo(f"- {agua} litros de agua")
+    click.echo(f"- {co2}kg de CO2 na atmosfera")
+
+@cli.command()
+@click.option('--vezes', default=10, help='Quantas vezes pretende usar a peca.')
+def decidir(vezes):
+    """Avalia se a compra e realmente necessaria."""
+    resultado = avaliar_necessidade(vezes)
     click.echo(resultado)
 
-if __name__=='__main__':
+@cli.command()
+def clima():
+    """Consulta o clima em tempo real para recomendar o uso consciente."""
+    click.echo("Conectando a API de clima externa...")
+    recomendacao = consultar_clima_e_recomendar()
+    click.echo(recomendacao)
+
+if __name__ == '__main__':
     cli()
