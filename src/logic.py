@@ -48,3 +48,16 @@ def avaliar_necessidade(vezes_uso_estimado):
     else:
         return "Compra consciente, ela ira ser usada no cotiadiano"
 
+def obter_historico_falso():
+    """
+    Função pura que retorna uma lista de dicionários simulando 
+    as roupas salvas no guarda-roupa.
+    """
+    # Dados fakes para testar a estrutura do comando
+    historico_roupas = [
+        {"nome": "Blusa de Algodão", "impacto": "Baixo", "agua": 200},
+        {"nome": "Calça Jeans", "impacto": "Alto", "agua": 8000},
+        {"nome": "Casaco de Poliéster", "impacto": "Médio", "agua": 1500}
+    ]
+    
+    return historico_roupas

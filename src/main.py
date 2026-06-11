@@ -1,6 +1,6 @@
 
 import click
-from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar
+from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar, obter_historico_falso
 
 @click.group()
 def cli():
@@ -30,5 +30,16 @@ def clima():
     recomendacao = consultar_clima_e_recomendar()
     click.echo(recomendacao)
 
+@cli.command()
+def historico():
+    """Mostra o historico de roupas consultadas no guarda-roupa."""
+    click.echo("=== HISTORICO DE CONSULTAS ECOLOGICAS ===")
+    
+    roupas = obter_historico_falso()
+    
+    for indice, roupa in enumerate(roupas, start=1):
+        click.echo(f"{indice}. {roupa['nome']} | Impacto: {roupa['impacto']} (Gasto de agua: {roupa['agua']}L)")
+        
 if __name__ == '__main__':
     cli()
+
