@@ -1,3 +1,5 @@
+from database import listar_roupas
+
 #regras de calculos
 import requests
 
@@ -61,3 +63,34 @@ def obter_historico_falso():
     ]
     
     return historico_roupas
+
+def gerar_historico_real():
+    """Processa as roupas guardadas na base de dados real e calcula as pegadas acumuladas."""
+    roupas_salvas = listar_roupas()
+
+    if not roupas_salvas:
+        return []
+
+    historico_processado = []
+
+    for roupa in roupas_salvas:
+        # Mapeia os dados que vêm da base de dados real das tuas colegas
+        nome = roupa.get('nome', 'Peça Sem Nome')
+        categoria = roupa.get('categoria', 'Geral')
+
+        # Usamos as tuas lógicas para calcular o impacto real de cada peça
+        # Se a tua função precisar da categoria, podes adaptar aqui
+        agua, co2 = calcular_impacto(1) 
+
+        # Define se o impacto é Alto/Médio/Baixo baseado nos litros de água
+        impacto_texto = "Baixo" if agua < 500 else "Médio" if agua < 2000 else "Alto"
+
+        historico_processado.append({
+            "nome": nome,
+            "categoria": categoria,
+            "impacto": impacto_texto,
+            "agua": agua,
+            "co2": co2
+        })
+
+    return historico_processado
