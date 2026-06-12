@@ -1,5 +1,5 @@
 
-from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar
+from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar, obter_historico_falso, gerar_historico_real
 
 def test_calculo_impacto_positivo():
     agua, co2 = calcular_impacto(1)
@@ -32,3 +32,25 @@ def test_decisao_compra_consciente():
     #Testando o caminho consciente
     assert "consciente" in avaliar_necessidade(50)
 
+def test_obter_historico_falso_retorna_lista():
+    # Chama a funcao que voce criou
+    dados = obter_historico_falso()
+    
+    # Garante que o resultado e uma lista e que ela nao esta vazia
+    assert isinstance(dados, list)
+    assert len(dados) > 0
+
+def test_obter_historico_falso_contem_chaves_corretas():
+    # Pega o historico e isola o primeiro item da lista
+    dados = obter_historico_falso()
+    primeira_roupa = dados[0]
+    
+    # Garante que esse item tem as propriedades obrigatorias
+    assert "nome" in primeira_roupa
+    assert "impacto" in primeira_roupa
+    assert "agua" in primeira_roupa
+
+def test_gerar_historico_real_devolve_lista_ou_vazio():
+    # Testa se a função integrada corre sem dar erros de sintaxe
+    resultado = gerar_historico_real()
+    assert isinstance(resultado, list)
