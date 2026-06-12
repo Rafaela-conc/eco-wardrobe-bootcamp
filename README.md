@@ -8,27 +8,30 @@ Uma aplicação em linha de comando (CLI) focada em ajudar os usuários a gerenc
 * Gabriela Costa Dias - Matrícula: 22504081
 
   ## Principal problema ressaltado :
-   A maioria das roupas que são compradas acabam nos aterros de lixo. Elas muitas vezes são descartadas da forma errada. Além disso, demoram um bom tempo para decompor, destruindo o meio ambiente e contribuindo para o aquecimento global. Quando elas são descartadas nos lugares errados, na maioria das vezes são descartadas no meio ambiente, assim destruindo como o habitat natural de várias espécies do planeta terra. Podemos ressaltar também o fato delas liberam CO2 na atmosfera assim contribuindo para o aquecimento global. 
+   A maioria das roupas que são compradas acabam nos aterros de lixo. Elas muitas vezes são descartadas da forma errada. Além disso, demoram um bom tempo para decompor, destruindo o meio ambiente e contribuindo para o aquecimento global. Quando elas são descartadas nos lugares errados, na maioria das vezes são descartadas no meio ambiente, assim destruindo como o habitat natural de várias espécies do planeta terra. Podemos ressaltar também o fato de que elas liberam CO2 na atmosfera assim contribuindo para o aquecimento global. 
   ## O que essas soluções do projeto ajudam :
   O consumo consciente ajuda a diminuir a quantidade de roupas que acabam nesses aterros. Além disso, se cada pessoa utilizar esse método do projeto iria ajudar a diminuir o aquecimento global e preservar espécies e a natureza com o menor descarte indevido de roupas. 
   
-  ##  Tecnologias e Nova Stack
-* **Linguagem:** Python 3.14+
+  ##  Tecnologias utilizadas
+* **Linguagem:** Python 
 * **Banco de Dados:** MySQL (Hospedado na nuvem da Aiven)
 * **Testes Automatizados:** Pytest
 
 
 ## 🚀 Como Executar Localmente
 
-1. Instale as dependências do projeto:
+### 1. Instale as dependências do projeto:
    ```bash
    pip install -r requirements.txt
- 
-2. Execute a aplicação:
+  ```
+
+### 2. Execute a aplicação:
   ```bash
   python src/main.py --help
+  ```
 
-3. Para rodar os testes automatizados e verificar a qualidade:
+### 3. Para rodar os testes automatizados e verificar a qualidade:
   ```bash
   python -m pytest
+  ```
   
