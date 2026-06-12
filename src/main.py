@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from database import listar_roupas, cadastrar_roupa
 
 import click
-from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar, obter_historico_falso
+from src.logic import calcular_impacto, avaliar_necessidade, consultar_clima_e_recomendar
 
 @click.group()
 def cli():
@@ -30,16 +34,54 @@ def clima():
     recomendacao = consultar_clima_e_recomendar()
     click.echo(recomendacao)
 
+
 @cli.command()
-def historico():
-    """Mostra o historico de roupas consultadas no guarda-roupa."""
-    click.echo("=== HISTORICO DE CONSULTAS ECOLOGICAS ===")
-    
-    roupas = obter_historico_falso()
-    
-    for indice, roupa in enumerate(roupas, start=1):
-        click.echo(f"{indice}. {roupa['nome']} | Impacto: {roupa['impacto']} (Gasto de agua: {roupa['agua']}L)")
-        
+@click.option('--nome', prompt='Nome da roupa', help='Nome ou tipo da peça.')
+@click.option('--categoria', prompt='Categoria', help='Ex: Camiseta, Calça, Vestido.')
+@click.option('--tamanho', prompt='Tamanho (P, M, G)', help='Tamanho da peça.')
+@click.option('--preco', prompt='Preço (R$)', type=float, help='Preço da peça.')
+@click.option('--descricao', prompt='Descrição', help='Detalhes da peça.')
+def cadastrar(nome, categoria, tamanho, preco, descricao):
+    """Cadastra uma nova roupa direto no MySQL da Aiven (Equivalente ao POST)."""
+    try:
+        click.echo("🔄 Conectando ao MySQL na nuvem para salvar a peça...")
+
+        # Chama a função que seu colega criou no database.py
+        novo_id = cadastrar_roupa(nome, categoria, tamanho, preco, descricao)
+
+        if novo_id:
+            click.echo(f"✅ Cadastrado com sucesso! ID da nova peça no banco: {novo_id}")
+        else:
+            click.echo("❌ Erro ao cadastrar peça no banco de dados.")
+
+    except Exception as e:
+        click.echo(f"💥 Ocorreu um erro interno: {str(e)}")
+
+
+@cli.command()
+def listar():
+    """Busca e exibe todas as roupas salvas na nuvem (Equivalente ao GET)."""
+    try:
+        click.echo("🔄 Buscando roupas na nuvem da Aiven...")
+
+        # Chama a função que faz o SELECT * FROM roupas
+        roupas_salvas = listar_roupas()
+
+        if not roupas_salvas:
+            click.echo("📭 Nenhuma roupa encontrada no banco de dados.")
+            return
+
+        click.echo(f"🎉 Sucesso! Encontramos {len(roupas_salvas)} roupa(s) no banco:\n")
+
+        # Exibe cada roupa bonitinha no terminal
+        for roupa in roupas_salvas:
+            click.echo(
+                f"🆔 ID: {roupa['id']} | 👕 {roupa['nome']} | 📦 Cat: {roupa['categoria']} | 📏 Tam: {roupa['tamanho']} | 💰 R$ {roupa['preco']}")
+            click.echo(f"📝 Descrição: {roupa['descricao']}")
+            click.echo("-" * 50)
+
+    except Exception as e:
+        click.echo(f"💥 Erro ao buscar dados no MySQL: {str(e)}")
+
 if __name__ == '__main__':
     cli()
-
